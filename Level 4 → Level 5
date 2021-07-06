@@ -1,0 +1,41 @@
+The only human-readable file(ASCII)can be found using the command file filename
+
+bandit4@bandit:~$ cd inhere
+bandit4@bandit:~/inhere$ find
+.
+./-file01
+./-file00
+./-file06
+./-file03
+./-file05
+./-file08
+./-file04
+./-file07
+./-file02
+./-file09
+bandit4@bandit:~/inhere$ file ./-file01
+./-file01: data
+bandit4@bandit:~/inhere$ file ./-file00
+./-file00: data
+bandit4@bandit:~/inhere$ file ./-file02
+./-file02: data
+bandit4@bandit:~/inhere$ file ./-file03
+./-file03: data
+bandit4@bandit:~/inhere$ file ./-file04
+./-file04: data
+bandit4@bandit:~/inhere$ file ./-file05
+./-file05: data
+bandit4@bandit:~/inhere$ file ./-file06
+./-file06: data
+bandit4@bandit:~/inhere$ file ./-file07
+./-file07: ASCII text
+bandit4@bandit:~/inhere$ file ./-file08
+./-file08: data
+bandit4@bandit:~/inhere$ file ./-file09
+./-file09: data
+bandit4@bandit:~/inhere$ cat ./-file07
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+:~$ ssh -p 2220 bandit5@bandit.labs.overthewire.org
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit5@bandit.labs.overthewire.org's password:koReBOKuIDDepwhWk7jZC0RTdopnAYKh
