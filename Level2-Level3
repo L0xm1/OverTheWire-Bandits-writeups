@@ -1,0 +1,12 @@
+ Read a File with spaces in filename ,use cat "name of your filename"
+
+bandit2@bandit:~$ ls
+spaces in this filename
+bandit2@bandit:~$ cat "spaces in this filename"
+UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+bandit2@bandit:~$ exit
+logout
+Connection to bandit.labs.overthewire.org closed.
+               ~$ ssh -p 2220 bandit3@bandit.labs.overthewire.org
+                This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+                bandit3@bandit.labs.overthewire.org's password:UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
