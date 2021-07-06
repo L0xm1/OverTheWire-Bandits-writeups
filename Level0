@@ -1,0 +1,12 @@
+Bandit Level 0
+
+
+
+Connect to SSH:
+Open the Terminal in Linux. SSH uses the terminal interface to interact with other computers
+$ ssh <username>@<remote>
+If you want to specify a port, add -p 2220 (replace 2220 with the desired port number).
+ssh -p 2220 user@host
+
+Type the Command:$ ssh -p 2220 bandit0@bandit.labs.overthewire.org
+                   bandit0@bandit.labs.overthewire.org's password:bandit0
