@@ -1,0 +1,9 @@
+To open a - file ,we use the command cat ./- (./ refers to the current directory)
+bandit1@bandit:~$ cat ./-
+CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+bandit1@bandit:~$ exit
+logout
+Connection to bandit.labs.overthewire.org closed.
+                ~$ ssh -p 2220 bandit2@bandit.labs.overthewire.org
+                   This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+                   bandit2@bandit.labs.overthewire.org's password:CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
