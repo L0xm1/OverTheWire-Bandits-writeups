@@ -1,0 +1,14 @@
+Since the password is located in the inhere directory,we use cd command to change from home directory to inhere directory.
+The size of the file is given(1033bytes),we use the find command to locate the file with the given file size.
+
+bandit5@bandit:~$ cd inhere
+bandit5@bandit:~/inhere$ find -size 1033c
+./maybehere07/.file2
+bandit5@bandit:~/inhere$ cat ./maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        bandit5@bandit:~/inhere$ exit
+logout
+Connection to bandit.labs.overthewire.org closed.
+               ~$ ssh -p 2220 bandit6@bandit.labs.overthewire.org
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+bandit6@bandit.labs.overthewire.org's password:DXjZPULLxYr17uwoI01bNLQbtFemEgo7
