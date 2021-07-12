@@ -9,6 +9,6 @@ DXjZPULLxYr17uwoI01bNLQbtFemEgo7
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         bandit5@bandit:~/inhere$ exit
 logout
 Connection to bandit.labs.overthewire.org closed.
-               ~$ ssh -p 2220 bandit6@bandit.labs.overthewire.org
+~$ ssh -p 2220 bandit6@bandit.labs.overthewire.org
 This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
 bandit6@bandit.labs.overthewire.org's password:DXjZPULLxYr17uwoI01bNLQbtFemEgo7
