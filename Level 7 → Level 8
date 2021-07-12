@@ -1,0 +1,10 @@
+*Since the password is stored in the data.txt file near to the word'millionth',grep command is used which searches a file for a particular pattern of characters, and displays all lines that contain that pattern
+*Syntax:  grep [options] pattern [files]
+
+bandit7@bandit:~$ grep 'millionth' data.txt
+millionth       cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+bandit7@bandit:~$ exit
+logout
+Connection to bandit.labs.overthewire.org closed.
+~$ ssh -p 2220 bandit8@bandit.labs.overthewire.org
+bandit8@bandit.labs.overthewire.org's password:cvX2JJa4CFALtqS87jk27qwqGhBM9plV
