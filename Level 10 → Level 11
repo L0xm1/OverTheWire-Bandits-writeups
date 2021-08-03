@@ -1,0 +1,11 @@
+*Since the file  data .txt contain  contains base64 encoded data.To encode the file content we use the command base64.
+*Since we have to decode the  encoded data ,-d option is used alongwith the base64 command.
+
+bandit10@bandit:~$ base64 -d data.txt
+The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+bandit10@bandit:~$ exit
+logout
+Connection to bandit.labs.overthewire.org closed.
+                :~$ ssh -p 2220 bandit11@bandit.labs.overthewire.org
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+bandit11@bandit.labs.overthewire.org's password:IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
