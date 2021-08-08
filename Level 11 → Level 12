@@ -9,7 +9,7 @@ The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 bandit12@bandit:~$ exit
 logout
 Connection to bandit.labs.overthewire.org closed.
-                 :~$ ssh -p 2220 bandit11@bandit.labs.overthewire.org
+                 :~$ ssh -p 2220 bandit12@bandit.labs.overthewire.org
 This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
 
 bandit11@bandit.labs.overthewire.org's password:5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
