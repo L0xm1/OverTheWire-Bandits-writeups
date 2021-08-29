@@ -1,0 +1,15 @@
+
+
+bandit14@bandit:~$ man nc
+bandit14@bandit:~$ nc localhost 30000
+4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+Correct!
+BfMYroe26WYalil77FoDi9qh59eK5xNr
+
+bandit14@bandit:~$ exit
+logout
+Connection to bandit.labs.overthewire.org closed.
+l0xmi@laxmi-Lenovo-G50-80:~$ ssh -p 2220 bandit15@bandit.labs.overthewire.org
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit15@bandit.labs.overthewire.org's password:BfMYroe26WYalil77FoDi9qh59eK5xNr
