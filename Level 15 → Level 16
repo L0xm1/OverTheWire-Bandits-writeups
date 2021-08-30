@@ -1,0 +1,82 @@
+bandit15@bandit:~$ openssl s_client -connect localhost:30001
+CONNECTED(00000003)
+depth=0 CN = localhost
+verify error:num=18:self signed certificate
+verify return:1
+depth=0 CN = localhost
+verify return:1
+---
+Certificate chain
+ 0 s:/CN=localhost
+   i:/CN=localhost
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIICBjCCAW+gAwIBAgIEHxhZ+zANBgkqhkiG9w0BAQUFADAUMRIwEAYDVQQDDAls
+b2NhbGhvc3QwHhcNMjEwODA1MjEyMjEzWhcNMjIwODA1MjEyMjEzWjAUMRIwEAYD
+VQQDDAlsb2NhbGhvc3QwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALqNmx6R
+csRsPgzRcRsq5oQ4BC9AT/Yu473WbK4SRjHOWwuA4Oqk9w8SLKYZ39FrDEnXSZJw
+xqKPR0AH72+l7Itv7X1H07VbeMTQoJVm6NsJm3cuyyxjRwfaIOUFsRtQQyvQlmw7
+3CgTbd3wEk1CD+6jlksJj801Vd0uvZh1VVERAgMBAAGjZTBjMBQGA1UdEQQNMAuC
+CWxvY2FsaG9zdDBLBglghkgBhvhCAQ0EPhY8QXV0b21hdGljYWxseSBnZW5lcmF0
+ZWQgYnkgTmNhdC4gU2VlIGh0dHBzOi8vbm1hcC5vcmcvbmNhdC8uMA0GCSqGSIb3
+DQEBBQUAA4GBADjhbe3bTnDWsS4xt8FFg7PJIqNAxF6QjP+7xzJ4yMvWtPP6tVXo
+F7SNI52juwH0nFDyM9KOrM/AknWqCYF+yfz6bLD7MaKZ+Kg3DiLaoVJOrVg6Y02+
+0vq1rLsqGko5wamCFamx7X9CtFsV0WQjZdA53Na/VwehtlFpf/p20VAi
+-----END CERTIFICATE-----
+subject=/CN=localhost
+issuer=/CN=localhost
+---
+No client certificate CA names sent
+Peer signing digest: SHA512
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 1019 bytes and written 269 bytes
+Verification error: self signed certificate
+---
+New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+Server public key is 1024 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
+    Session-ID: 14292F822BE8298C46688601631140C92135A4B211841EBA7918209834C02CA8
+    Session-ID-ctx: 
+    Master-Key: 522A4EB7D400F2ACC0D1B7069A196C50B722B072A15D86DEF3A564FE33D5227AE28E906CC0A676EEC11500379F4C9024
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 7200 (seconds)
+    TLS session ticket:
+    0000 - 3a a9 fe 3b 12 a1 ed 2b-8d a6 cf aa 23 c9 12 88   :..;...+....#...
+    0010 - ee 64 43 6a 6e f5 93 82-ba 7f 8b ed b7 a2 4b 54   .dCjn.........KT
+    0020 - fb bd 81 b9 c5 d3 44 ee-58 16 06 4b a0 fc c2 48   ......D.X..K...H
+    0030 - 3d 3e c5 e3 4c 69 c0 5c-af 8f 0f 4e a8 6e c6 2c   =>..Li.\...N.n.,
+    0040 - e3 b8 10 a1 62 bd ec ed-9a b2 c4 d3 ef a8 56 e3   ....b.........V.
+    0050 - 1d 44 22 d4 25 84 85 bc-96 af 09 21 49 3b 39 33   .D".%......!I;93
+    0060 - 50 47 90 2b ca a9 99 5b-75 8b fe 29 84 20 41 b9   PG.+...[u..). A.
+    0070 - dd 9f af 65 ba de ac e3-04 5c 41 e3 91 43 7c 9e   ...e.....\A..C|.
+    0080 - 6b 99 2c 8a 68 76 3c e9-67 7f d6 09 52 81 ec 3e   k.,.hv<.g...R..>
+    0090 - f0 1b bd 55 2e 8a 11 a5-0e 79 81 c2 b3 f4 36 80   ...U.....y....6.
+
+    Start Time: 1630359480
+    Timeout   : 7200 (sec)
+    Verify return code: 18 (self signed certificate)
+    Extended master secret: yes
+---
+BfMYroe26WYalil77FoDi9qh59eK5xNr
+Correct!
+cluFn7wTiGryunymYOu4RcffSxQluehd
+
+closed
+bandit15@bandit:~$ exit
+logout
+Connection to bandit.labs.overthewire.org closed.
+l0xmi@laxmi-Lenovo-G50-80:~$ ssh -p 2220 bandit16@bandit.labs.overthewire.org
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit16@bandit.labs.overthewire.org's password: cluFn7wTiGryunymYOu4RcffSxQluehd
+Linux bandit.otw.local 5.4.8 x86_64 GNU/Linux
