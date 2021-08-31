@@ -1,0 +1,388 @@
+bandit16@bandit:~$ man nmap
+bandit16@bandit:~$ nmap -p 31000-32000 localhost
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2021-08-31 23:02 CEST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00024s latency).
+Not shown: 996 closed ports
+PORT      STATE SERVICE
+31046/tcp open  unknown
+31518/tcp open  unknown
+31691/tcp open  unknown
+31790/tcp open  unknown
+31960/tcp open  unknown
+
+*Now we have to find out which of these ports listen to SSL 
+
+bandit16@bandit:~$ openssl s_client -connect localhost:31046
+CONNECTED(00000003)
+140651640803392:error:141A10F4:SSL routines:ossl_statem_client_read_transition:unexpected message:../ssl/statem/statem_clnt.c:284:
+---
+no peer certificate available
+---
+No client certificate CA names sent
+---
+SSL handshake has read 176 bytes and written 183 bytes
+Verification: OK
+---
+New, (NONE), Cipher is (NONE)
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : 0000
+    Session-ID: 
+    Session-ID-ctx: 
+    Master-Key: 
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    Start Time: 1630443850
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+    Extended master secret: no
+---
+
+bandit16@bandit:~$ openssl s_client -connect localhost:31518
+CONNECTED(00000003)
+depth=0 CN = localhost
+verify error:num=18:self signed certificate
+verify return:1
+depth=0 CN = localhost
+verify return:1
+---
+Certificate chain
+ 0 s:/CN=localhost
+   i:/CN=localhost
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIICBjCCAW+gAwIBAgIEemdTMzANBgkqhkiG9w0BAQUFADAUMRIwEAYDVQQDDAls
+b2NhbGhvc3QwHhcNMjEwODA1MjEyMzAxWhcNMjIwODA1MjEyMzAxWjAUMRIwEAYD
+VQQDDAlsb2NhbGhvc3QwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAOdm8ILY
+AU44wgo3jUpX3FovRa6nYPgDoakC7HEPf/KC14doDQ5b8yu7q68Dqy8Dk81MjTFE
+Ubgw1nZuOEJSgBSt1tg46u4fPl5Lo7Wze8kEOehZx02pb/GT8J1GBUq6G3UiFxzk
+6mOjDkWIxi58vW0vZcRw39Mq68eN2n85ZyRVAgMBAAGjZTBjMBQGA1UdEQQNMAuC
+CWxvY2FsaG9zdDBLBglghkgBhvhCAQ0EPhY8QXV0b21hdGljYWxseSBnZW5lcmF0
+ZWQgYnkgTmNhdC4gU2VlIGh0dHBzOi8vbm1hcC5vcmcvbmNhdC8uMA0GCSqGSIb3
+DQEBBQUAA4GBAIC35Xbl2aS3MNWwuClSJujjY87vq/HejzuaJ55ppzpmhEbe4Nmu
+awO9Wwly/2kyzsUJBC1caiDAxxfceJF7CaweHPQ3C7n2Q+QtHxIe0buSrXKpkApm
+Z6dmq3COxZF6MI8Kj/hJaUGhbvWg1I7jdnxGP7YmHFWnkJJwe+2tl5cW
+-----END CERTIFICATE-----
+subject=/CN=localhost
+issuer=/CN=localhost
+---
+No client certificate CA names sent
+Peer signing digest: SHA512
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 1019 bytes and written 269 bytes
+Verification error: self signed certificate
+---
+New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+Server public key is 1024 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
+    Session-ID: 7D9AB8FECF69F9198DD9DDF8385E075E010A4E731A57F4B3F4E0279A3CCBD224
+    Session-ID-ctx: 
+    Master-Key: E9B8010B02A087998FDF7B7CCAC6A9A852FC8F31D19F6FA40CA1A6455107ABA6C9B22450257EE9EFF220B0C75E463281
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 7200 (seconds)
+    TLS session ticket:
+    0000 - 7f ee 01 eb 7b dc ca d5-5a 29 ae 99 6d 5d 7a 3c   ....{...Z)..m]z<
+    0010 - 2a a0 b7 df 92 76 ac 2c-4f 5c 28 b6 0c f5 06 aa   *....v.,O\(.....
+    0020 - 4a db 25 1f 14 9e 83 fa-dc c9 aa 62 51 15 33 25   J.%........bQ.3%
+    0030 - 42 e0 de 7c e6 6e ea 7f-0c 8e 8f 06 a1 c3 65 48   B..|.n........eH
+    0040 - e9 6c 32 53 5f 52 74 60-82 4e 81 9b 37 ef 81 9c   .l2S_Rt`.N..7...
+    0050 - c4 b2 84 6d 18 05 35 95-dd 06 20 51 7d f1 2c 6e   ...m..5... Q}.,n
+    0060 - d6 41 bf 24 bd 56 9a 9b-cb 11 40 67 b3 64 89 df   .A.$.V....@g.d..
+    0070 - 7a 20 75 6b a8 6e 18 5c-9d cc a6 65 49 fe 7c 42   z uk.n.\...eI.|B
+    0080 - d1 78 c3 61 bb 0d 9e e0-cb 92 53 8b 05 80 e7 84   .x.a......S.....
+    0090 - 56 26 ea 3a a0 9c 43 72-45 61 8f 1d 1f 0a 24 bd   V&.:..CrEa....$.
+
+    Start Time: 1630443867
+    Timeout   : 7200 (sec)
+    Verify return code: 18 (self signed certificate)
+    Extended master secret: yes
+---
+
+ cluFn7wTiGryunymYOu4RcffSxQluehd
+ cluFn7wTiGryunymYOu4RcffSxQluehd
+
+
+^Z
+[1]+  Stopped                 openssl s_client -connect localhost:31518
+
+
+bandit16@bandit:~$ openssl s_client -connect localhost:31691
+CONNECTED(00000003)
+139761892683840:error:141A10F4:SSL routines:ossl_statem_client_read_transition:unexpected message:../ssl/statem/statem_clnt.c:284:
+---
+no peer certificate available
+---
+No client certificate CA names sent
+---
+SSL handshake has read 176 bytes and written 183 bytes
+Verification: OK
+---
+New, (NONE), Cipher is (NONE)
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : 0000
+    Session-ID: 
+    Session-ID-ctx: 
+    Master-Key: 
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    Start Time: 1630443912
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+    Extended master secret: no
+---
+bandit16@bandit:~$ openssl s_client -connect localhost:31790
+CONNECTED(00000003)
+depth=0 CN = localhost
+verify error:num=18:self signed certificate
+verify return:1
+depth=0 CN = localhost
+verify return:1
+---
+Certificate chain
+ 0 s:/CN=localhost
+   i:/CN=localhost
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIICBjCCAW+gAwIBAgIEatsK7TANBgkqhkiG9w0BAQUFADAUMRIwEAYDVQQDDAls
+b2NhbGhvc3QwHhcNMjEwODA1MjEyMzAxWhcNMjIwODA1MjEyMzAxWjAUMRIwEAYD
+VQQDDAlsb2NhbGhvc3QwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALbshxNY
+mdJ/7RpASCHk+XULoBymcRoKY9tPU25zhhPmrFAyv0HNXG/GqPjOxI4MHG627HOf
+b00a/ikeDUTVdCiDXhungyUx6W07H3uiHHbfNLs1QGl2GPdBVA+z5DZcNsWJ1QB5
+888HEzp8YNWyeHnP+5gy5LqlX5hUkF1eu6C1AgMBAAGjZTBjMBQGA1UdEQQNMAuC
+CWxvY2FsaG9zdDBLBglghkgBhvhCAQ0EPhY8QXV0b21hdGljYWxseSBnZW5lcmF0
+ZWQgYnkgTmNhdC4gU2VlIGh0dHBzOi8vbm1hcC5vcmcvbmNhdC8uMA0GCSqGSIb3
+DQEBBQUAA4GBABVCD/dhWpgN9KC5Eb6hd9ToreRhof44OQaHalJtsayPBBMTK3Lp
+KC88rNVJW+cX0z+eUe6en0RIvU56dLNT+zm9cbDvCV1cumz4++nauWes/11eA5aG
+2NNgKQHYvT+bOfo3lhOQNwtzpO4MX1sGMjO4dlS4AmxTdjz0UVUPLamk
+-----END CERTIFICATE-----
+subject=/CN=localhost
+issuer=/CN=localhost
+---
+No client certificate CA names sent
+Peer signing digest: SHA512
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 1019 bytes and written 269 bytes
+Verification error: self signed certificate
+---
+New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+Server public key is 1024 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
+    Session-ID: 521DD4288BD50B0C48332A7D834E13229F09A9FC6FE75AC13CDF0CBE33826DE4
+    Session-ID-ctx: 
+    Master-Key: D106E47CE096D8F088B7AAE66EB57E36A1843ACF63AAB284C87FB278E3AF2BBB858EE324B1DB453EE086A0051EFC0C99
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 7200 (seconds)
+    TLS session ticket:
+    0000 - 30 d5 a9 3d 7d a2 f1 16-f5 b3 32 79 c1 92 42 1a   0..=}.....2y..B.
+    0010 - 9f 0d fb ce 9b 22 35 98-c2 a0 83 3d 5b 9d d5 d2   ....."5....=[...
+    0020 - c0 61 14 8c 22 c2 0b ad-f4 35 d0 62 dc 08 a9 11   .a.."....5.b....
+    0030 - 42 eb b5 0c 97 c6 27 6c-6e 9a 8c cb 77 23 1a c5   B.....'ln...w#..
+    0040 - 26 25 34 5e 60 fc 39 4b-47 3c 7b de 77 89 82 f5   &%4^`.9KG<{.w...
+    0050 - 47 8c 15 e7 24 7d 3f b6-94 2c 07 29 41 c1 eb b8   G...$}?..,.)A...
+    0060 - b9 dd d0 4b 71 a9 2e 2a-80 b5 5a 82 c8 21 fd 57   ...Kq..*..Z..!.W
+    0070 - cb 4e 3d c7 6d 63 89 67-57 9f d3 ad f5 3d df 27   .N=.mc.gW....=.'
+    0080 - 08 c6 80 3b 5c 57 2d f8-9d 33 72 4a 14 20 fd b8   ...;\W-..3rJ. ..
+    0090 - 1c 7a 3f 01 60 6f 0f 8a-ec d9 9a ad 91 27 2d 56   .z?.`o.......'-V
+
+    Start Time: 1630443925
+    Timeout   : 7200 (sec)
+    Verify return code: 18 (self signed certificate)
+    Extended master secret: yes
+---
+ cluFn7wTiGryunymYOu4RcffSxQluehd
+Correct!
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
++TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+-----END RSA PRIVATE KEY-----
+
+*We got the private key to access to the next level.We use nano edditor to copy the private key to a file.
+
+bandit16@bandit:~$ mkdir /tmp/bandit16
+bandit16@bandit:~$ cd /tmp/bandit16
+bandit16@bandit:/tmp/bandit16$ nano /tmp/bandit16/banditkey.private
+
+Unable to create directory /home/bandit16/.nano: Permission denied
+It is required for saving/loading search history or cursor positions.
+
+Press Enter to continue
+
+bandit16@bandit:/tmp/bandit16$ ssh -i banditkey.private bandit17@localhost
+Could not create directory '/home/bandit16/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit16/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0644 for 'banditkey.private' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "banditkey.private": bad permissions
+bandit17@localhost's password: 
+Permission denied, please try again.
+bandit17@localhost's password: 
+Permission denied, please try again.
+bandit17@localhost's password: 
+
+[1]+  Stopped                 ssh -i banditkey.private bandit17@localhost
+
+*WE change the permission to 600 so that only the user can read the private key
+
+bandit16@bandit:/tmp/bandit16$ chmod 600 banditkey.private
+bandit16@bandit:/tmp/bandit16$ ssh -i banditkey.private bandit17@localhost
+Could not create directory '/home/bandit16/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit16/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+Linux bandit.otw.local 5.4.8 x86_64 GNU/Linux
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+If you find any problems, please report them to Steven or morla on
+irc.overthewire.org.
+
+--[ Playing the games ]--
+
+  This machine might hold several wargames.
+  If you are playing "somegame", then:
+
+    * USERNAMES are somegame0, somegame1, ...
+    * Most LEVELS are stored in /somegame/.
+    * PASSWORDS for each level are stored in /etc/somegame_pass/.
+
+  Write-access to homedirectories is disabled. It is advised to create a
+  working directory with a hard-to-guess name in /tmp/.  You can use the
+  command "mktemp -d" in order to generate a random and hard to guess
+  directory in /tmp/.  Read-access to both /tmp/ and /proc/ is disabled
+  so that users can not snoop on eachother. Files and directories with
+  easily guessable or short names will be periodically deleted!
+
+  Please play nice:
+
+    * don't leave orphan processes running
+    * don't leave exploit-files laying around
+    * don't annoy other players
+    * don't post passwords or spoilers
+    * again, DONT POST SPOILERS!
+      This includes writeups of your solution on your blog or website!
+
+--[ Tips ]--
+
+  This machine has a 64bit processor and many security-features enabled
+  by default, although ASLR has been switched off.  The following
+  compiler flags might be interesting:
+
+    -m32                    compile for 32bit
+    -fno-stack-protector    disable ProPolice
+    -Wl,-z,norelro          disable relro
+
+  In addition, the execstack tool can be used to flag the stack as
+  executable on ELF binaries.
+
+  Finally, network-access is limited for most levels by a local
+  firewall.
+
+--[ Tools ]--
+
+ For your convenience we have installed a few usefull tools which you can find
+ in the following locations:
+
+    * gef (https://github.com/hugsy/gef) in /usr/local/gef/
+    * pwndbg (https://github.com/pwndbg/pwndbg) in /usr/local/pwndbg/
+    * peda (https://github.com/longld/peda.git) in /usr/local/peda/
+    * gdbinit (https://github.com/gdbinit/Gdbinit) in /usr/local/gdbinit/
+    * pwntools (https://github.com/Gallopsled/pwntools)
+    * radare2 (http://www.radare.org/)
+    * checksec.sh (http://www.trapkit.de/tools/checksec.html) in /usr/local/bin/checksec.sh
+
+--[ More information ]--
+
+  For more information regarding individual wargames, visit
+  http://www.overthewire.org/wargames/
+
+  For support, questions or comments, contact us through IRC on
+  irc.overthewire.org #wargames.
+
+  Enjoy your stay!
+
+bandit17@bandit:~$ 
+
+
