@@ -1,0 +1,18 @@
+bandit19@bandit:~$ ls 
+bandit20-do
+
+bandit19@bandit:~$ ./bandit20-do
+Run a command as another user.
+  Example: ./bandit20-do id
+
+bandit19@bandit:~$ ./bandit20-do cat /etc/bandit_pass/bandit20
+GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+
+bandit19@bandit:~$ exit
+logout
+Connection to bandit.labs.overthewire.org closed.
+
+:~$ ssh -p 2220 bandit20@bandit.labs.overthewire.org
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit20@bandit.labs.overthewire.org's password: GbKksEFF4yrVs6il55v6gwY5aVje5f0j
