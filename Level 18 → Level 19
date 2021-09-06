@@ -1,0 +1,16 @@
+*We use pseudo terminals to prevent the automatic  logout
+*We use ssh -t command for forcing a pseudo terminal 
+:~$ ssh -p 2220 bandit18@bandit.labs.overthewire.org -t /bin/sh
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit18@bandit.labs.overthewire.org's password: 
+$ ls
+readme
+$ cat readme
+IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+$ exit
+Connection to bandit.labs.overthewire.org closed.
+:~$ ssh -p 2220 bandit19@bandit.labs.overthewire.org
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit19@bandit.labs.overthewire.org's password:IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
